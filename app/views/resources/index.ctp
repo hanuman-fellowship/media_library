@@ -4,7 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('file_type_id');?></th>
-			<th><?php echo $this->Paginator->sort('file_name');?></th>
+			<th><?php echo $this->Paginator->sort('filename');?></th>
 			<th><?php echo $this->Paginator->sort('collection_id');?></th>
 			<th><?php echo $this->Paginator->sort('description');?></th>
 			<th><?php echo $this->Paginator->sort('sort_order');?></th>
@@ -23,7 +23,7 @@
 		<td>
 			<?php echo $this->Html->link($resource['FileType']['name'], array('controller' => 'file_types', 'action' => 'view', $resource['FileType']['id'])); ?>
 		</td>
-		<td><?php echo $resource['Resource']['file_name']; ?>&nbsp;</td>
+		<td><?php echo $resource['Resource']['filename']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($resource['Collection']['title'], array('controller' => 'collections', 'action' => 'view', $resource['Collection']['id'])); ?>
 		</td>

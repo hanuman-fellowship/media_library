@@ -70,7 +70,7 @@
 		<tr<?php echo $class;?>>
 			<td><?php echo $resource['id'];?></td>
 			<td><?php echo $resource['file_type_id'];?></td>
-			<td><?php echo $resource['file_name'];?></td>
+			<td><?php echo $resource['filename'];?></td>
 			<td><?php echo $resource['collection_id'];?></td>
 			<td><?php echo $resource['description'];?></td>
 			<td><?php echo $resource['sort_order'];?></td>
