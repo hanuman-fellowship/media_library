@@ -10,7 +10,7 @@ $(document).ready(function() {
 		'multi'         : false,
 		'auto'          : true,
 		'buttonText'    : 'Upload File',
-		'folder'        : '/app/webroot/files/resources',
+		'folder'        : '/app/files/resources',
 		'onComplete'    : function(event,queueID,fileObj,response,data) {
 			$('#ResourceFilename').val(response);
 			$('#resource_name').html('File Name: <i>'+response+'</i>');

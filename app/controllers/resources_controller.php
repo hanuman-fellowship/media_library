@@ -22,6 +22,20 @@ class ResourcesController extends AppController {
 		$this->autoRender = false;
 	}
 
+	function download($id = null) {
+		$this->view = 'Media';
+		$resource = $this->Resource->findById($id);
+		$file = pathinfo($resource['Resource']['filename']);
+		$params = array(
+			'id' => $file['basename'],
+			'name' => $file['filename'],
+			'extension' => $file['extension'],
+			'download' => false,
+			'path' => APP . 'files' . DS . 'resources' . DS
+		);
+		$this->log($file);
+		$this->set($params);
+	}
 
 	function add() {
 		if (!empty($this->data)) {
