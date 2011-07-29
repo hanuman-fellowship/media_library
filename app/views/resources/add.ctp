@@ -16,7 +16,6 @@ if (isset($this->data['Resource']['filename'])) {
 		?><span id='resource_name'><?= !empty($this->data) ? $this->data['Resource']['filename'] : '' ?></span><?
 		echo $this->Form->hidden('filename', array('enabled' => false));
 		echo $this->Form->error('filename');
-		echo $this->Form->input('file_type_id');
 		echo $this->Form->input('description');
 	?>
 <?php echo $this->Form->end(__('Submit', true));?>

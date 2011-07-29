@@ -1,7 +1,7 @@
 <?php
 class Resource extends AppModel {
 	var $name = 'Resource';
-	var $belongsTo = array('FileType', 'Collection');
+	var $belongsTo = array('Collection');
 	var $validate = array(
 		'file_name' => array(
 			'notempty' => array(

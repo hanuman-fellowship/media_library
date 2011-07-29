@@ -10,14 +10,16 @@ class ResourcesController extends AppController {
 //		$this->Auth->allowedActions = array('upload', 'show');
 	}
 
-	function upload() {
-		$filename = $this->Uploadify->upload();
-		echo $filename;
-		if (!$this->Resource->findByFilename($filename)) {
+	function upload($filename = null, $collection_id = null) {
+		if (!$filename) {
+			$filename = $this->Uploadify->upload();
+			echo $filename;
+		} else {
 			$this->Resource->create();
-			$this->Resource->save(array('Resource' => 
-				array('filename' => $filename)
-			));
+			$this->Resource->save(array('Resource' => array(
+				'filename' => $filename,
+				'collection_id' => $collection_id
+			)));
 		}
 		$this->autoRender = false;
 	}
@@ -45,9 +47,7 @@ class ResourcesController extends AppController {
 				$this->redirect(array('action' => 'index'));
 			}
 		}
-		$fileTypes = $this->Resource->FileType->find('list');
 		$this->set('collections',$this->Resource->Collection->getOptions('disabled_parents'));
-		$this->set(compact('fileTypes'));
 	}
 
 	function show() {
@@ -72,6 +72,12 @@ class ResourcesController extends AppController {
 	}
 
 	function index() {
+		$files = glob(APP . 'files' . DS . 'resources' . DS . '*');
+		foreach($files as &$file) {
+			$parts = 	pathinfo($file);
+			$file = $parts['basename'];
+		}
+		//$this->set('files', $this->Resources->
 		$this->Resource->recursive = 0;
 		$this->set('resources', $this->paginate());
 	}
