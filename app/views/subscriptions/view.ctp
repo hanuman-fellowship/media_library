@@ -8,7 +8,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($subscription['User']['id'], array('controller' => 'users', 'action' => 'view', $subscription['User']['id'])); ?>
+			<?php echo $this->Html->link($subscription['User']['username'], array('controller' => 'users', 'action' => 'view', $subscription['User']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Collection'); ?></dt>

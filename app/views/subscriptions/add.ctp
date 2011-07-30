@@ -4,7 +4,8 @@
 		<legend><?php __('Add Subscription'); ?></legend>
 	<?php
 		echo $this->Form->input('user_id');
-		echo $this->Form->input('collection_id');
+		echo $this->Form->label('collection_id','Collection');
+		echo $this->Form->select('collection_id',$collections,null,array('empty' => false, 'escape'=>false));
 		echo $this->Form->input('expiration_date');
 	?>
 	</fieldset>

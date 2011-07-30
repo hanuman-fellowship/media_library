@@ -15,4 +15,9 @@ class Resource extends AppModel {
 		),
 	);
 
+	function beforeDelete() {
+		unlink(APP . 'files' . DS . 'resources' . DS . $this->field('filename', array('Resource.id' => $this->id)));
+		return true;
+	}
+
 }

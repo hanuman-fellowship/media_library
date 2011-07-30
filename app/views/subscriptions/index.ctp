@@ -19,7 +19,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $subscription['Subscription']['id']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($subscription['User']['id'], array('controller' => 'users', 'action' => 'view', $subscription['User']['id'])); ?>
+			<?php echo $this->Html->link($subscription['User']['username'], array('controller' => 'users', 'action' => 'view', $subscription['User']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($subscription['Collection']['title'], array('controller' => 'collections', 'action' => 'view', $subscription['Collection']['id'])); ?>

@@ -27,7 +27,7 @@ class SubscriptionsController extends AppController {
 			}
 		}
 		$users = $this->Subscription->User->find('list');
-		$collections = $this->Subscription->Collection->find('list');
+		$collections = $this->Subscription->Collection->getOptions();
 		$this->set(compact('users', 'collections'));
 	}
 
