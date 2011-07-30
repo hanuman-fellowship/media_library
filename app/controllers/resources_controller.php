@@ -20,6 +20,7 @@ class ResourcesController extends AppController {
 				'filename' => $filename,
 				'collection_id' => $collection_id
 			)));
+			echo $this->Resource->id;
 		}
 		$this->autoRender = false;
 	}
@@ -40,34 +41,19 @@ class ResourcesController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$resource = $this->Resource->findByFilename($this->data['Resource']['filename']);
-			$this->data['Resource']['id'] = $resource['Resource']['id'];
-			if ($this->Resource->save($this->data)) {
+			if ($this->Resource->mySave($this->data)) {
 				$this->redirect(array('action' => 'index'));
 			}
 		}
 		$this->set('collections',$this->Resource->Collection->getOptions('disabled_parents'));
 	}
 
-	function show() {
-		$args = $this->passedArgs? $this->passedArgs : array(
-			'ptype' => null,
-			'dtype' => null,
-			'product' => null
-		);
-		$this->set('resources', $this->Resource->filteredData($args));
-		$productTypes = $this->Resource->ProductResource->Product->Category->find('list', array(
-			'conditions' => array('Category.parent_id' => null)
-		));
-		$this->set('product_type_id', $args['ptype']);
-		$this->set(compact('productTypes'));
-		$documentTypes = $this->Resource->DocumentType->find('list');
-		$this->set('document_type_id', $args['dtype']);
-		$this->set(compact('documentTypes'));
-		$this->Resource->ProductResource->Product->order = 'part_number asc';
-		$products = $this->Resource->ProductResource->Product->find('list');
-		$this->set('product_id', $args['product']);
-		$this->set(compact('products'));
+	function view($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid resource', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->set('resource', $this->Resource->read(null, $id));
 	}
 
 	function index() {

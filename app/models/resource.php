@@ -20,4 +20,14 @@ class Resource extends AppModel {
 		return true;
 	}
 
+	function mySave($data) {
+		foreach($data['Resource']['descriptions'] as $id => $description) {
+			$this->save(array('Resource' => array(
+				'id' => $id,
+				'description' => $description
+			)));
+		}
+		return true;
+	}
+
 }

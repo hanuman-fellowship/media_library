@@ -8,26 +8,26 @@ $(document).ready(function() {
 		'uploader'      : '/app/webroot/files/uploadify/uploadify.swf',
 		'cancelImg'     : '/app/webroot/files/uploadify/cancel.png',
 		'script'        : '/resources/upload',
-		'multi'         : false,
+		'multi'         : true,
 		'auto'          : true,
-		'buttonText'    : 'Upload File',
+		'buttonText'    : 'Upload Files',
 		'folder'        : '/app/files/resources',
-		'onSelect'        : function() {
+		'onSelect'      : function(eventa, ida, fileObja) {
 			if (!$('#ResourceCollectionId').val()) {
 				alert('Please choose a Collection');
 				goAhead = false;
 				return false;
 			} else {
 				$('#ResourceCollectionId').attr('disabled', true);
+				$('#proto').clone().appendTo('#files').attr('id', ida).show().find('span').html(fileObja.name);
 			}
 		},
-		'onComplete'    : function(event,queueID,fileObj,response,data) {
+		'onComplete'    : function(eventb,idb,fileObjb,response,data) {
 			if (goAhead) {
-				$('#ResourceFilename').val(response);
-				$('#resource_name').html('File Name: <i>'+response+'</i>');
-				$('#resource_uploadUploader').hide();
-				alert($('#ResourceCollectionId').val());
-				$.get("/resources/upload/" + response + "/" + $('#ResourceCollectionId').val());
+				var url = "/resources/upload/" + response + "/" + $('#ResourceCollectionId').val();
+				$.get(url, function(dbId){
+					$('#'+idb).find('textarea').attr('id',"Resource"+ dbId +"Description").attr('name',"data[Resource][descriptions]["+dbId+"]");
+				});
 			}
 		}
 	});
