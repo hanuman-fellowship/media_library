@@ -31,11 +31,10 @@ class ResourcesController extends AppController {
 		$params = array(
 			'id' => $file['basename'],
 			'name' => $file['filename'],
-			'extension' => $file['extension'],
-			'download' => false,
+			'extension' => strtolower($file['extension']),
+			'download' => true,
 			'path' => APP . 'files' . DS . 'resources' . DS
 		);
-		$this->log($file);
 		$this->set($params);
 	}
 

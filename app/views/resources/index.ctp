@@ -19,7 +19,10 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $resource['Resource']['id']; ?>&nbsp;</td>
-		<td><?php echo $resource['Resource']['filename']; ?>&nbsp;</td>
+		<td><?php echo $this->Html->link($resource['Resource']['filename'], array(
+			'action' => 'download',
+			$resource['Resource']['id']
+		)); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($resource['Collection']['title'], array('controller' => 'collections', 'action' => 'view', $resource['Collection']['id'])); ?>
 		</td>
