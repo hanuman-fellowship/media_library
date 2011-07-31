@@ -5,29 +5,35 @@
 $(document).ready(function() {
 	var goAhead = true;
 	$('#resource_upload').uploadify({
-		'uploader'      : '/app/webroot/files/uploadify/uploadify.swf',
-		'cancelImg'     : '/app/webroot/files/uploadify/cancel.png',
-		'script'        : '/resources/upload',
-		'multi'         : true,
-		'auto'          : true,
-		'buttonText'    : 'Upload Files',
-		'folder'        : '/app/files/resources',
-		'onSelect'      : function(eventa, ida, fileObja) {
+		'uploader'       : '/app/webroot/files/uploadify/uploadify.swf',
+		'cancelImg'      : '/app/webroot/files/uploadify/cancel.png',
+		'script'         : '/resources/upload',
+		'multi'          : true,
+		'auto'           : true,
+		'buttonText'     : 'Upload Files',
+		'folder'         : '/app/files/resources',
+		'removeCompleted': false,
+		'onSelect'       : function(event, id, fileObj) {
 			if (!$('#ResourceCollectionId').val()) {
 				alert('Please choose a Collection');
 				goAhead = false;
 				return false;
 			} else {
 				$('#ResourceCollectionId').attr('disabled', true);
-				$('#proto').clone().appendTo('#files').attr('id', ida).show().find('span').html(fileObja.name);
 			}
 		},
-		'onComplete'    : function(eventb,idb,fileObjb,response,data) {
+		'onProgress'     : function(event, id, fileObj) {
+			if ($('#data'+id).length == 0) {
+				$('#proto').clone().appendTo('#resource_upload'+id).attr('id','uploading'+ id).show();
+			}
+		},
+		'onComplete'     : function(eventb,id,fileObj,response,data) {
 			if (goAhead) {
 				var url = "/resources/upload/" + response + "/" + $('#ResourceCollectionId').val();
 				$.get(url, function(dbId){
-					$('#'+idb).find('textarea').attr('id',"Resource"+ dbId +"Description").attr('name',"data[Resource][descriptions]["+dbId+"]");
+					$('#uploading'+id).attr('id',"Resource"+ dbId +"Description").attr('name',"data[Resource][descriptions]["+dbId+"]");
 				});
+				$('#resource_upload'+id).find('.cancel').remove();
 			}
 		}
 	});

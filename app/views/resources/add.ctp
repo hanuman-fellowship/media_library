@@ -16,11 +16,12 @@ if (isset($this->data['Resource']['filename'])) {
 		echo $this->Form->hidden('filename', array('enabled' => false));
 		echo $this->Form->error('filename');
 	?>
-	<div id='files'>
-		<div id='proto' style='display:none'>
-			<span></span>
-			<?=$this->Form->input('description', array('name' => '', 'id' => ''))?>
-		</div>
-	</div>
+	<?=$this->Form->input('description', array(
+		'name' => '', 
+		'id' => 'proto',
+		'style' => 'display:none',
+		'div' => false,
+		'label' => false
+	))?>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
