@@ -4,6 +4,7 @@
 <script type="text/javascript"> 
 $(document).ready(function() {
 	var goAhead = true;
+	var cloned = false;
 	$('#resource_upload').uploadify({
 		'uploader'       : '/app/webroot/files/uploadify/uploadify.swf',
 		'cancelImg'      : '/app/webroot/files/uploadify/cancel.png',
@@ -23,8 +24,9 @@ $(document).ready(function() {
 			}
 		},
 		'onProgress'     : function(event, id, fileObj) {
-			if ($('#data'+id).length == 0) {
+			if (!cloned) {
 				$('#proto').clone(true).appendTo('#resource_upload'+id).attr('id','uploading'+ id).watermark('Description').show();
+				cloned = true;
 			}
 		},
 		'onComplete'     : function(event,id,fileObj,response,data) {
@@ -34,6 +36,7 @@ $(document).ready(function() {
 					$('#uploading'+id).attr('id',"Resource"+ dbId +"Description").attr('name',"data[Resource][descriptions]["+dbId+"]").attr('rel', dbId);
 				});
 				$('#resource_upload'+id).find('.cancel').remove();
+				cloned = false;
 			}
 		},
 		'onAllComplete' : function(event, data) {
