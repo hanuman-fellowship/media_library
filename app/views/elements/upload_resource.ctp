@@ -13,6 +13,7 @@ $(document).ready(function() {
 		'buttonText'     : 'Upload Files',
 		'folder'         : '/app/files/resources',
 		'removeCompleted': false,
+		'simUploadLimit' : 10,
 		'onSelect'       : function(event, id, fileObj) {
 			if (!$('#ResourceCollectionId').val()) {
 				if (goAhead) alert('Please choose a Collection');
