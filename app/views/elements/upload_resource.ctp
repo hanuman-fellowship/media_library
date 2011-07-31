@@ -15,7 +15,7 @@ $(document).ready(function() {
 		'removeCompleted': false,
 		'onSelect'       : function(event, id, fileObj) {
 			if (!$('#ResourceCollectionId').val()) {
-				alert('Please choose a Collection');
+				if (goAhead) alert('Please choose a Collection');
 				goAhead = false;
 				return false;
 			} else {
@@ -24,17 +24,20 @@ $(document).ready(function() {
 		},
 		'onProgress'     : function(event, id, fileObj) {
 			if ($('#data'+id).length == 0) {
-				$('#proto').clone().appendTo('#resource_upload'+id).attr('id','uploading'+ id).watermark('Description').show();
+				$('#proto').clone(true).appendTo('#resource_upload'+id).attr('id','uploading'+ id).watermark('Description').show();
 			}
 		},
-		'onComplete'     : function(eventb,id,fileObj,response,data) {
+		'onComplete'     : function(event,id,fileObj,response,data) {
 			if (goAhead) {
 				var url = "/resources/upload/" + response + "/" + $('#ResourceCollectionId').val();
 				$.get(url, function(dbId){
-					$('#uploading'+id).attr('id',"Resource"+ dbId +"Description").attr('name',"data[Resource][descriptions]["+dbId+"]");
+					$('#uploading'+id).attr('id',"Resource"+ dbId +"Description").attr('name',"data[Resource][descriptions]["+dbId+"]").attr('rel', dbId);
 				});
 				$('#resource_upload'+id).find('.cancel').remove();
 			}
+		},
+		'onAllComplete' : function(event, data) {
+			$('#submit').attr('disabled', false);
 		}
 	});
 });

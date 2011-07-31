@@ -1,4 +1,4 @@
-<?=$this->Html->script('jquery.watermark.min')?>
+<?=$this->Html->script(array('add_resource', 'jquery.watermark.min'))?>
 <?
 $file_uploaded = false;
 if (isset($this->data['Resource']['filename'])) {
@@ -21,7 +21,9 @@ if (isset($this->data['Resource']['filename'])) {
 		'name' => '', 
 		'id' => 'proto',
 		'style' => 'display:none',
-		'label' => false
+		'label' => false,
+		'class' => 'desc'
 	))?>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?=$this->Form->submit('Submit', array('disabled' => true, 'id' => 'submit'))?>
+<?php echo $this->Form->end();?>
 </div>

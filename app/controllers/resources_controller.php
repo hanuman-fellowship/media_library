@@ -39,6 +39,15 @@ class ResourcesController extends AppController {
 		$this->set($params);
 	}
 
+	// this function called when a single description is submitted
+	// via ajax by hitting return
+	function saveDescription() {
+		$this->Resource->save(array('Resource' => array(
+			'id' => $this->params['url']['id'],
+			'description' => $this->params['url']['description']
+		)));
+	}
+
 	function add() {
 		if (!empty($this->data)) {
 			if ($this->Resource->mySave($this->data)) {
