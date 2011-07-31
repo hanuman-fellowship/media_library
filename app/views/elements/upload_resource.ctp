@@ -4,7 +4,6 @@
 <script type="text/javascript"> 
 $(document).ready(function() {
 	var goAhead = true;
-	var cloned = false;
 	$('#resource_upload').uploadify({
 		'uploader'       : '/app/webroot/files/uploadify/uploadify.swf',
 		'cancelImg'      : '/app/webroot/files/uploadify/cancel.png',
@@ -23,11 +22,8 @@ $(document).ready(function() {
 				$('#ResourceCollectionId').attr('disabled', true);
 			}
 		},
-		'onProgress'     : function(event, id, fileObj) {
-			if (!cloned) {
-				$('#proto').clone(true).appendTo('#resource_upload'+id).attr('id','uploading'+ id).watermark('Description').show();
-				cloned = true;
-			}
+		'onOpen'         : function(event, id, fileObj) {
+			$('#proto').clone(true).appendTo('#resource_upload'+id).attr('id','uploading'+ id).watermark('Description').show();
 		},
 		'onComplete'     : function(event,id,fileObj,response,data) {
 			if (goAhead) {
