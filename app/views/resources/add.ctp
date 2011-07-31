@@ -1,3 +1,4 @@
+<?=$this->Html->script('jquery.watermark.min')?>
 <?
 $file_uploaded = false;
 if (isset($this->data['Resource']['filename'])) {
@@ -20,7 +21,6 @@ if (isset($this->data['Resource']['filename'])) {
 		'name' => '', 
 		'id' => 'proto',
 		'style' => 'display:none',
-		'div' => false,
 		'label' => false
 	))?>
 <?php echo $this->Form->end(__('Submit', true));?>

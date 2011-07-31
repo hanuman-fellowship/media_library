@@ -24,7 +24,7 @@ $(document).ready(function() {
 		},
 		'onProgress'     : function(event, id, fileObj) {
 			if ($('#data'+id).length == 0) {
-				$('#proto').clone().appendTo('#resource_upload'+id).attr('id','uploading'+ id).show();
+				$('#proto').clone().appendTo('#resource_upload'+id).attr('id','uploading'+ id).watermark('Description').show();
 			}
 		},
 		'onComplete'     : function(eventb,id,fileObj,response,data) {
