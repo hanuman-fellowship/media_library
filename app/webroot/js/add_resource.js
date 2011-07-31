@@ -10,7 +10,11 @@ $(document).ready(function(){
 					var url = '/resources/saveDescription';
 					var data = {'id' : $(this).attr('rel'), 'description' : $(this).val()};
 					$.get(url, data, function() {
-						queueItem.next('.uploadifyQueueItem').find(':input').focus();
+						if (queueItem.next('.uploadifyQueueItem').length) {
+							queueItem.next('.uploadifyQueueItem').find(':input').focus();
+						} else {
+							queueItem.prev('.uploadifyQueueItem').find(':input').focus();
+						}
 						queueItem.remove();
 					});
 				}
